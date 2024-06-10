@@ -1,0 +1,27 @@
+{
+  "name": "gaf-back",
+  "version": "1.0.0",
+  "description": "GAF Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fac29/gaf-back.git"
+  },
+  "author": "Fearghal, Alexander, Ghilerme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fac29/gaf-back/issues"
+  },
+  "homepage": "https://github.com/fac29/gaf-back#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/sqlite3": "^3.1.11"
+  }
+}
