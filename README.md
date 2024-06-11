@@ -64,7 +64,7 @@ The server will run on the port specified in the `.env` file. If no port is spec
 
 `GET /products` - Retrieve a list of all available products
 `GET /products/123` - Retrieve details of a specific product with ID 123
-`GET /filter/:category` - Filter by category
+`GET /products/category/:category` - Filter by category
 
 ## Cart:
 
