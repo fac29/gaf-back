@@ -1,0 +1,73 @@
+Table groups {
+    id integer [primary key]
+    name text [not null]
+}
+
+Table categories {
+    id integer [primary key]
+    name text [not null]
+    group_id integer
+}
+
+Table products {
+    id integer [primary key]
+    name text
+    description text
+    image_path text
+    stock integer
+    category_id integer
+    price real
+    size text
+    color text
+    genre text
+    created_at timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table users {
+    id integer [primary key]
+    name text
+    username text
+    password text
+    address text
+    image_path text
+    created_at timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table reviews {
+    id integer [primary key]
+    name text
+    description text
+    image_path text
+    score integer
+    product_id integer
+    user_id integer
+    created_at timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table carts {
+    id integer [primary key]
+    user_id integer
+    created_at timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table products_carts {
+    id integer [primary key]
+    cart_id integer
+    products_id integer
+    created_at timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table sessions {
+    id integer [primary key]
+    user_id integer
+    created_at timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Ref: categories.group_id > groups.id // many-to-one
+Ref: products.category_id > categories.id // many-to-one
+Ref: reviews.product_id > products.id // many-to-one
+Ref: reviews.user_id > users.id // many-to-one
+Ref: carts.user_id > users.id // many-to-one
+Ref: products_carts.cart_id > carts.id // many-to-one
+Ref: products_carts.products_id > products.id // many-to-one
+Ref: sessions.user_id > users.id // many-to-one
