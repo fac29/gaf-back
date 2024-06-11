@@ -13,8 +13,8 @@ ON CONFLICT DO NOTHING;
 INSERT INTO categories (name, group_id) VALUES
   ('Smartphones', 1),
   ('Laptops', 1),
-  ('Men\'s Wear', 2),
-  ('Women\'s Wear', 2),
+  ('Men Wear', 2),
+  ('Women Wear', 2),
   ('Fiction', 3)
 ON CONFLICT DO NOTHING;
 
@@ -22,8 +22,8 @@ ON CONFLICT DO NOTHING;
 INSERT INTO products (name, description, image_path, stock, category_id, price, size, color, genre) VALUES
   ('iPhone 13', 'Latest Apple smartphone', 'path/to/image1.jpg', 50, 1, 999.99, 'N/A', 'Black', 'N/A'),
   ('MacBook Pro', 'High performance laptop', 'path/to/image2.jpg', 30, 2, 1999.99, '15 inch', 'Silver', 'N/A'),
-  ('Men\'s T-Shirt', 'Comfortable cotton t-shirt', 'path/to/image3.jpg', 100, 3, 19.99, 'L', 'Blue', 'N/A'),
-  ('Women\'s Dress', 'Elegant evening dress', 'path/to/image4.jpg', 40, 4, 79.99, 'M', 'Red', 'N/A'),
+  ('Men T-Shirt', 'Comfortable cotton t-shirt', 'path/to/image3.jpg', 100, 3, 19.99, 'L', 'Blue', 'N/A'),
+  ('Women Dress', 'Elegant evening dress', 'path/to/image4.jpg', 40, 4, 79.99, 'M', 'Red', 'N/A'),
   ('The Great Gatsby', 'Classic novel by F. Scott Fitzgerald', 'path/to/image5.jpg', 200, 5, 10.99, 'N/A', 'N/A', 'Fiction')
 ON CONFLICT DO NOTHING;
 
