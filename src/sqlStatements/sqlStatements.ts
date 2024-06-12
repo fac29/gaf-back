@@ -1,5 +1,6 @@
 const db = require('../../database/db.js');
 
+//section for product statements
 export async function sqlDeleteProduct(productID: number) {
 	try {
 		const deleteProduct = await db
@@ -248,6 +249,94 @@ export async function sqlCreateReview(newContent: any) {
 			return `Failed to create a new review`;
 		} else {
 			return `New review with id ${insertReview.lastInsertRowid} was successfully created`;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
+
+//section for Use SQL statements
+export async function sqlDeleteUser(userId: number) {
+	try {
+		const deleteUser = await db
+			.prepare(
+				`
+            DELETE FROM users
+            WHERE id = ?
+            `,
+			)
+			.run(userId);
+		if (deleteUser.changes === 0) {
+			return 'there were no changes as user does not exist';
+		} else {
+			return deleteUser;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
+
+export async function sqlFetchUser(userId: number) {
+	try {
+		const fetchUser = await db
+			.prepare(
+				`
+                SELECT * FROM users
+                WHERE id = ?
+                `,
+			)
+			.all(userId);
+		if (fetchUser.length === 0) {
+			return `User was not found in the database`;
+		} else {
+			return fetchUser;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
+
+export async function sqlUpdateUser(userId: number, newContent: any) {
+	try {
+		const updateUser = await db
+			.prepare(
+				`
+                UPDATE users
+                SET content = ?
+                WHERE id = ?
+                `,
+			)
+			.run(newContent, userId);
+
+		if (updateUser.changes === 0) {
+			return `User was not found in the database`;
+		} else {
+			return `User with id ${userId} was successfully updated`;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
+
+export async function sqlCreateUser(newContent: any) {
+	try {
+		const insertUser = await db
+			.prepare(
+				`
+                INSERT INTO users (content)
+                VALUES (?)
+                `,
+			)
+			.run(newContent);
+
+		if (insertUser.changes === 0) {
+			return `Failed to create a new user`;
+		} else {
+			return `New user with id ${insertUser.lastInsertRowid} was successfully created`;
 		}
 	} catch (error) {
 		console.log((error as Error).message);
