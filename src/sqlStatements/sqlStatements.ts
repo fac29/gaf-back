@@ -62,15 +62,16 @@ export async function sqlRandomProducts() {
 
 export async function sqlQueryProducts(searchQuery: Array<string>) {
 	try {
-		/* ['sticky', 'pink', 'shoes'] */
-		const statementPrep = await db.prepare(
-			`
-            SELECT * FROM products WHERE name LIKE ? OR description LIKE ?
-            `,
-		);
-		const searchedQueryProducts = searchQuery.map((el) =>
-			statementPrep.all(`${el}`),
-		);
+	
+		const searchTerms = await searchQuery.map(
+			(term) => `(name LIKE '%${term}%' OR description LIKE '%${term}%')`
+		  ).join(' OR ');
+	  
+		  const query = `
+			SELECT * FROM products
+			WHERE ${searchTerms}
+		  `;
+		  const searchedQueryProducts = await db.prepare(query).all();
 
 		return searchedQueryProducts;
 	} catch (error) {

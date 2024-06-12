@@ -52,9 +52,9 @@ export function Products(app: Express) {
 	});
 
 	app.get('/products', async (req: Request, res: Response) => {
-		const searchQuery = req.body;
+		//const searchQuery = req.body;
 		try {
-			const queryProducts = await sqlQueryProducts(['sticky', 'pink', 'shoes']);
+			const queryProducts = await sqlQueryProducts(['iphone']);
 			if (queryProducts.length < 1) {
 				res.send(`There were no products in the database`);
 			} else {
