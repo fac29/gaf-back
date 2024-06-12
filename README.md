@@ -44,6 +44,7 @@ An ecommerce web app. Built with typescript, node deployed on AWS. Tested with P
 
     ```env
     PORT=3000
+    DB_FILE=gaf_database.sqlite
     ```
 
 ## Usage
@@ -53,7 +54,7 @@ An ecommerce web app. Built with typescript, node deployed on AWS. Tested with P
 To start the server, use the following command:
 
 ```sh
-npm run dev
+npm start
 ```
 
 The server will run on the port specified in the `.env` file. If no port is specified, it will default to `3000`.
@@ -62,28 +63,30 @@ The server will run on the port specified in the `.env` file. If no port is spec
 
 ## Products:
 
-`GET /products` - Retrieve a list of all available products
-`GET /products/123` - Retrieve details of a specific product with ID 123
-`GET /products/category/:category` - Filter by category
+- `GET /products` - Retrieve a list of all available products
+- `GET /products/random` - Retrieve details of a specific product with ID 123
+- `GET /products/` - Search (Request body: `['iphone']`) Hardcoded at present.
+- `GET /product/123` - Retrieve details of a specific product with ID 123
+- `DELETE /product/123` - Deletes a specific product with ID 123
 
-## Cart:
+<!-- ## Cart:
 
-`POST /cart` - Add a new item to the user's shopping cart
-`PUT /cart/123` - Update the quantity of an item with ID 123 in the user's shopping cart
-`DELETE /cart/123` - Remove an item with ID 123 from the user's shopping cart
+- `POST /cart` - Add a new item to the user's shopping cart
+- `PUT /cart/123` - Update the quantity of an item with ID 123 in the user's shopping cart
+- `DELETE /cart/123` - Remove an item with ID 123 from the user's shopping cart
 
 ## Orders:
 
-`POST /orders` - Create a new order from the user's shopping cart
-`GET /orders/123` - Retrieve the details of a specific order with ID 123
+- `POST /orders` - Create a new order from the user's shopping cart
+- `GET /orders/123` - Retrieve the details of a specific order with ID 123
 
 ## User Sessions:
 
-`POST /login` - Authenticate a user and create a new session (`Request body: { email, password }`)
-`GET /me` - Retrieve the currently logged-in user's information
-`POST /logout` - Log out the current user and invalidate their session
-`POST /register` - Create a new user account (Request body: `{ name, email, password }`)
-`PUT /user/:id` - Update the currently logged-in user's information
+- `POST /login` - Authenticate a user and create a new session (`Request body: { email, password }`)
+- `GET /me` - Retrieve the currently logged-in user's information
+- `POST /logout` - Log out the current user and invalidate their session
+- `POST /register` - Create a new user account (Request body: `{ name, email, password }`)
+- `PUT /user/:id` - Update the currently logged-in user's information -->
 
 ## DB Diagram
 
