@@ -7,7 +7,6 @@ import {
 } from '../sqlStatements/sqlStatements';
 
 export function Products(app: Express) {
-
 	app.delete('/product/:id', async (req: Request, res: Response) => {
 		const productId: number = parseInt(req.params.id);
 		try {
@@ -55,7 +54,7 @@ export function Products(app: Express) {
 	app.get('/products', async (req: Request, res: Response) => {
 		const searchQuery = req.body;
 		try {
-			const queryProducts = await sqlQueryProducts(searchQuery: Array<string>);
+			const queryProducts = await sqlQueryProducts(['sticky', 'pink', 'shoes']);
 			if (queryProducts.length < 1) {
 				res.send(`There were no products in the database`);
 			} else {
