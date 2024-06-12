@@ -26,9 +26,9 @@ export async function sqlFetchProduct(productID: number) {
 		const fetchProduct = await db
 			.prepare(
 				`
-            * FROM products
-            WHERE id = ?
-            `,
+                SELECT * FROM products
+                WHERE id =?
+                `,
 			)
 			.all(productID);
 		if (fetchProduct.changes === 0) {
@@ -78,30 +78,3 @@ export async function sqlQueryProducts(searchQuery: Array<string>) {
 		return (error as Error).message;
 	}
 }
-
-// type Filters = {
-// 	category?: string;
-// 	size?: string;
-// 	color?: string;
-// 	description?: string;
-// };
-// const search_products = db.prepare(/*sql*/ `
-//   SELECT
-//     id,
-//     name
-//   FROM products
-//   WHERE name LIKE ?
-// AND category = ?
-// AND size =?
-// `);
-
-// if (name)
-//     search_products += AND category = category
-
-// if (category)
-//     search_products += AND category = category
-
-// if (size)
-//     search_products += AND size = size
-
-// {gategory: shoes, size: S }
