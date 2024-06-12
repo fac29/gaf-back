@@ -26,7 +26,7 @@ export function Products(app: Express) {
 		const productId: number = parseInt(req.params.id);
 		try {
 			const fetchProduct = await sqlFetchProduct(productId);
-			if (fetchProduct && fetchProduct.id) {
+			if (fetchProduct.length < 1) {
 				res.send(`Product with ID${productId} was not found in the database`);
 			} else {
 				res.send(fetchProduct);
