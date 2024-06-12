@@ -41,7 +41,7 @@ export function Products(app: Express) {
 		try {
 			const randomProducts = await sqlRandomProducts();
 			if (randomProducts.length < 1) {
-				res.send(`There were no products in the database`);
+				res.send({ message: 'There were no products in the database' });
 			} else {
 				res.send(randomProducts);
 			}
