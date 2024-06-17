@@ -65,6 +65,21 @@ export function Products(app: Express) {
 			console.log((error as Error).message);
 		}
 	});
+
+	app.post('/products', async (req: Request, res: Response) => {
+		const searchQuery = req.body;
+		try {
+			const queryProducts = await sqlQueryProducts(searchQuery);
+			if (queryProducts.length < 1) {
+				res.send(`There were no products in the database`);
+			} else {
+				res.send(queryProducts);
+			}
+		} catch (error) {
+			res.send((error as Error).message);
+			console.log((error as Error).message);
+		}
+	});
 }
 
 export default Products;
