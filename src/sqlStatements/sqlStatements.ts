@@ -395,7 +395,7 @@ export async function sqlCreateSession(userId: number, expires_at: string) {
 		if (result.changes === 0) {
 			return `Failed to create a new session`;
 		} else {
-			return `New session with id ${result.lastInsertRowid} was successfully created`;
+			return result.lastInsertRowid;
 		}
 	} catch (error) {
 		console.log((error as Error).message);
@@ -411,7 +411,7 @@ export async function sqlDeleteSession(sessionId: number) {
 		DELETE FROM sessions WHERE id = ?
 		`,
 		);
-		const result = deleteSession.run(sessionId;
+		const result = deleteSession.run(sessionId);
 		if (result.changes === 0) {
 			return `Failed to delete session`;
 		} else {
