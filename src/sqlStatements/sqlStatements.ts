@@ -299,6 +299,27 @@ export async function sqlFetchUser(userId: number) {
 	}
 }
 
+export async function sqlFetchUserByEmail(email: string) {
+	try {
+		const fetchUserByEmail = await db
+			.prepare(
+				`
+                SELECT * FROM users
+                WHERE email = ?
+                `,
+			)
+			.all(email);
+		if (fetchUserByEmail.length === 0) {
+			return `User was not found in the database`;
+		} else {
+			return fetchUserByEmail;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
+
 export async function sqlUpdateUser(userId: number, newContent: any) {
 	try {
 		const updateUser = await db
@@ -343,3 +364,25 @@ export async function sqlCreateUser(newContent: any) {
 		return (error as Error).message;
 	}
 }
+
+// Create session
+export async function sqlCreateSession(id: string, userId: number, expiresAt: string) {
+	try {
+	  const insertSession = await db.run(
+		`
+		INSERT INTO sessions (id, user_id, expires_at)
+		VALUES (?, ?, ?)
+		`,
+		[id, userId, expiresAt]
+	  );
+  
+	  if (insertSession.changes === 0) {
+		return `Failed to create a new session`;
+	  } else {
+		return `New session with id ${insertSession.lastID} was successfully created`;
+	  }
+	} catch (error) {
+	  console.log((error as Error).message);
+	  return (error as Error).message;
+	}
+  }
