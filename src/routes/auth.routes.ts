@@ -2,6 +2,7 @@ import { Express, Request, Response } from 'express';
 import {
 	sqlCreateSession,
 	sqlFetchUserByEmail,
+	sqlCreateUser,
 } from '../sqlStatements/sqlStatements';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
@@ -16,18 +17,16 @@ export function Auth(app: Express) {
 			if (Array.isArray(users) && users.length > 0) {
 				const user = users[0]; // Assuming email is unique and we get an array with a single user
 				if (bcrypt.compareSync(password, user.password)) {
-					const sessionId = crypto.randomBytes(18).toString('base64');
+					
 					const expiresAt = new Date(
 						Date.now() + 7 * 24 * 60 * 60 * 1000,
 					).toISOString(); // 7 days from now
 
-					const sessionResult = await sqlCreateSession(
-						sessionId,
-						user.id,
-						expiresAt,
-					);
+					const sessionId = await sqlCreateSession(user.id, expiresAt);
 
-					console.log(sessionResult);
+					if (typeof sessionId === 'string') {
+						return res.status(500).send(sessionId);
+					  }
 
 					res.cookie('sid', sessionId, {
 						signed: true,
@@ -51,5 +50,35 @@ export function Auth(app: Express) {
 		}
 	});
 
-	app.post('/signup', async (req, res) => {});
+	app.post('/signup', async (req, res) => {
+
+		try{
+			const { name, password, email } = req.body;
+			
+			if (!name || !password || !email) {
+				return res.status(400).send('Bad input');
+			}
+
+			// Hash the password
+			const hashedPassword = await bcrypt.hash(password, 12);
+
+			// Create the user in the DB
+			const userResult = await sqlCreateUser(name, '', hashedPassword, '', '', email);
+
+			//Check if we get a wrong answer
+			if (typeof userResult === 'string') {
+				return res.status(500).send(userResult);
+			}
+
+			// Fetch the created user to get their ID
+			const users = await sqlFetchUserByEmail(email);
+			if (!Array.isArray(users) || users.length === 0) {
+				return res.status(500).send('User creation failed');
+			}
+			const user = users[0];
+
+		}
+
+
+	});
 }

@@ -343,16 +343,18 @@ export async function sqlUpdateUser(userId: number, newContent: any) {
 	}
 }
 
-export async function sqlCreateUser(newContent: any) {
+
+// Create User
+export async function sqlCreateUser(name: string, username: string, password: string, address: string, imagePath: string, email: string) {
 	try {
 		const insertUser = await db
 			.prepare(
 				`
-                INSERT INTO users (content)
-                VALUES (?)
+                INSERT INTO users (name, username, password, address, image_path, email)
+                VALUES (?, ?, ?, ?, ?, ?)
                 `,
 			)
-			.run(newContent);
+			.run(name, username, password, address, imagePath, email);
 
 		if (insertUser.changes === 0) {
 			return `Failed to create a new user`;
@@ -366,14 +368,14 @@ export async function sqlCreateUser(newContent: any) {
 }
 
 // Create session
-export async function sqlCreateSession(id: string, userId: number, expiresAt: string) {
+export async function sqlCreateSession( userId: number, expiresAt: string) {
 	try {
 	  const insertSession = await db.run(
 		`
-		INSERT INTO sessions (id, user_id, expires_at)
-		VALUES (?, ?, ?)
+		INSERT INTO sessions ( user_id, expires_at)
+		VALUES ( ?, ?)
 		`,
-		[id, userId, expiresAt]
+		[ userId, expiresAt]
 	  );
   
 	  if (insertSession.changes === 0) {
