@@ -402,3 +402,23 @@ export async function sqlCreateSession(userId: number, expires_at: string) {
 		return (error as Error).message;
 	}
 }
+
+// Delete session
+export async function sqlDeleteSession(sessionId: number) {
+	try {
+		const deleteSession = await db.prepare(
+			`
+		DELETE FROM sessions WHERE id = ?
+		`,
+		);
+		const result = deleteSession.run(sessionId;
+		if (result.changes === 0) {
+			return `Failed to delete session`;
+		} else {
+			return `Deleted session with id ${result.lastInsertRowid}`;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
