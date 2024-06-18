@@ -1,275 +1,259 @@
 BEGIN;
 
--- Insert values into groups
-INSERT INTO groups (name) VALUES
-  ('Electronics'),
-  ('Clothing'),
-  ('Books'),
-  ('Toys'),
-  ('Home Appliances'),
-  ('Sports Equipment'),
-  ('Furniture'),
-  ('Beauty Products'),
-  ('Groceries'),
-  ('Automotive'),
-  ('Garden Supplies'),
-  ('Office Supplies'),
-  ('Musical Instruments'),
-  ('Pet Supplies'),
-  ('Health Products'),
-  ('Movies'),
-  ('Music'),
-  ('Video Games'),
-  ('Tools'),
-  ('Cleaning Supplies'),
-  ('Baby Products'),
-  ('Jewelry'),
-  ('Watches'),
-  ('Bags'),
-  ('Shoes'),
-  ('Kitchen Appliances'),
-  ('Lighting'),
-  ('Outdoor Gear'),
-  ('Art Supplies'),
-  ('Stationery')
-ON CONFLICT DO NOTHING;
+INSERT INTO groups VALUES(1,'Electronics');
+INSERT INTO groups VALUES(2,'Clothing');
+INSERT INTO groups VALUES(3,'Books');
+INSERT INTO groups VALUES(4,'Toys');
+INSERT INTO groups VALUES(5,'Home Appliances');
+INSERT INTO groups VALUES(6,'Sports Equipment');
+INSERT INTO groups VALUES(7,'Furniture');
+INSERT INTO groups VALUES(8,'Beauty Products');
+INSERT INTO groups VALUES(9,'Groceries');
+INSERT INTO groups VALUES(10,'Automotive');
+INSERT INTO groups VALUES(11,'Garden Supplies');
+INSERT INTO groups VALUES(12,'Office Supplies');
+INSERT INTO groups VALUES(13,'Musical Instruments');
+INSERT INTO groups VALUES(14,'Pet Supplies');
+INSERT INTO groups VALUES(15,'Health Products');
+INSERT INTO groups VALUES(16,'Movies');
+INSERT INTO groups VALUES(17,'Music');
+INSERT INTO groups VALUES(18,'Video Games');
+INSERT INTO groups VALUES(19,'Tools');
+INSERT INTO groups VALUES(20,'Cleaning Supplies');
+INSERT INTO groups VALUES(21,'Baby Products');
+INSERT INTO groups VALUES(22,'Jewelry');
+INSERT INTO groups VALUES(23,'Watches');
+INSERT INTO groups VALUES(24,'Bags');
+INSERT INTO groups VALUES(25,'Shoes');
+INSERT INTO groups VALUES(26,'Kitchen Appliances');
+INSERT INTO groups VALUES(27,'Lighting');
+INSERT INTO groups VALUES(28,'Outdoor Gear');
+INSERT INTO groups VALUES(29,'Art Supplies');
+INSERT INTO groups VALUES(30,'Stationery');
 
--- Insert values into categories
-INSERT INTO categories (name, group_id) VALUES
-  ('Smartphones', 1),
-  ('Laptops', 1),
-  ('Men Wear', 2),
-  ('Women Wear', 2),
-  ('Fiction', 3),
-  ('Non-Fiction', 3),
-  ('Action Figures', 4),
-  ('Board Games', 4),
-  ('Refrigerators', 5),
-  ('Microwaves', 5),
-  ('Bicycles', 6),
-  ('Treadmills', 6),
-  ('Sofas', 7),
-  ('Beds', 7),
-  ('Makeup', 8),
-  ('Skincare', 8),
-  ('Vegetables', 9),
-  ('Fruits', 9),
-  ('Car Accessories', 10),
-  ('Motorcycles', 10),
-  ('Plants', 11),
-  ('Gardening Tools', 11),
-  ('Paper', 12),
-  ('Pens', 12),
-  ('Guitars', 13),
-  ('Drums', 13),
-  ('Dog Food', 14),
-  ('Cat Food', 14),
-  ('Vitamins', 15),
-  ('Medicines', 15)
-ON CONFLICT DO NOTHING;
 
--- Insert values into products with Picsum URLs
-INSERT INTO products (name, description, image_path, stock, category_id, price, size, color, genre) VALUES
-  ('iPhone 13', 'Latest Apple smartphone', 'https://picsum.photos/200', 50, 1, 999.99, 'N/A', 'Black', 'N/A'),
-  ('MacBook Pro', 'High performance laptop', 'https://picsum.photos/200', 30, 2, 1999.99, '15 inch', 'Silver', 'N/A'),
-  ('Men T-Shirt', 'Comfortable cotton t-shirt', 'https://picsum.photos/200', 100, 3, 19.99, 'L', 'Blue', 'N/A'),
-  ('Women Dress', 'Elegant evening dress', 'https://picsum.photos/200', 40, 4, 79.99, 'M', 'Red', 'N/A'),
-  ('The Great Gatsby', 'Classic novel by F. Scott Fitzgerald', 'https://picsum.photos/200', 200, 5, 10.99, 'N/A', 'N/A', 'Fiction'),
-  ('Samsung Galaxy S21', 'New generation Samsung smartphone', 'https://picsum.photos/200', 60, 1, 899.99, 'N/A', 'White', 'N/A'),
-  ('Dell XPS 13', 'Ultra portable laptop', 'https://picsum.photos/200', 25, 2, 1399.99, '13 inch', 'Black', 'N/A'),
-  ('Women Jeans', 'Stylish and comfortable', 'https://picsum.photos/200', 70, 4, 49.99, 'M', 'Blue', 'N/A'),
-  ('Apple iPad', 'Latest model', 'https://picsum.photos/200', 80, 1, 799.99, '10 inch', 'Space Gray', 'N/A'),
-  ('Sony WH-1000XM4', 'Noise cancelling headphones', 'https://picsum.photos/200', 90, 1, 349.99, 'N/A', 'Black', 'N/A'),
-  ('Nike Running Shoes', 'Comfortable running shoes', 'https://picsum.photos/200', 120, 3, 69.99, '10', 'Red', 'N/A'),
-  ('LG OLED TV', 'High quality OLED TV', 'https://picsum.photos/200', 15, 1, 2999.99, '55 inch', 'Black', 'N/A'),
-  ('Adidas Jacket', 'Warm and stylish jacket', 'https://picsum.photos/200', 50, 3, 99.99, 'L', 'Green', 'N/A'),
-  ('KitchenAid Mixer', 'High performance mixer', 'https://picsum.photos/200', 30, 5, 199.99, 'N/A', 'Red', 'N/A'),
-  ('Bose SoundLink', 'Portable Bluetooth speaker', 'https://picsum.photos/200', 45, 1, 129.99, 'N/A', 'Black', 'N/A'),
-  ('Canon EOS R', 'High quality mirrorless camera', 'https://picsum.photos/200', 20, 1, 2499.99, 'N/A', 'Black', 'N/A'),
-  ('Nest Thermostat', 'Smart thermostat', 'https://picsum.photos/200', 35, 1, 249.99, 'N/A', 'White', 'N/A'),
-  ('Samsung Fridge', 'Large capacity refrigerator', 'https://picsum.photos/200', 25, 9, 1499.99, 'N/A', 'Silver', 'N/A'),
-  ('Bosch Dishwasher', 'Efficient and quiet', 'https://picsum.photos/200', 20, 9, 799.99, 'N/A', 'White', 'N/A'),
-  ('Dyson Vacuum', 'Powerful vacuum cleaner', 'https://picsum.photos/200', 40, 9, 499.99, 'N/A', 'Silver', 'N/A'),
-  ('Asus ROG Laptop', 'Gaming laptop with high specs', 'https://picsum.photos/200', 10, 2, 1599.99, '17 inch', 'Black', 'N/A'),
-  ('HP OfficeJet Printer', 'All-in-one printer', 'https://picsum.photos/200', 60, 1, 229.99, 'N/A', 'White', 'N/A'),
-  ('Sony PlayStation 5', 'Next-gen gaming console', 'https://picsum.photos/200', 100, 18, 499.99, 'N/A', 'White', 'N/A'),
-  ('Xbox Series X', 'Microsoft gaming console', 'https://picsum.photos/200', 90, 18, 499.99, 'N/A', 'Black', 'N/A'),
-  ('Nintendo Switch', 'Portable gaming console', 'https://picsum.photos/200', 110, 18, 299.99, 'N/A', 'Red/Blue', 'N/A'),
-  ('Logitech Mouse', 'Wireless computer mouse', 'https://picsum.photos/200', 150, 1, 29.99, 'N/A', 'Black', 'N/A'),
-  ('Amazon Echo', 'Smart speaker with Alexa', 'https://picsum.photos/200', 80, 1, 99.99, 'N/A', 'Black', 'N/A'),
-  ('Fitbit Charge 4', 'Fitness tracker with GPS', 'https://picsum.photos/200', 70, 1, 129.99, 'N/A', 'Black', 'N/A'),
-  ('Roku Streaming Stick', 'HD streaming device', 'https://picsum.photos/200', 60, 1, 49.99, 'N/A', 'Black', 'N/A'),
-  ('Google Nest Hub', 'Smart display with Google Assistant', 'https://picsum.photos/200', 50, 1, 99.99, 'N/A', 'White', 'N/A')
-ON CONFLICT DO NOTHING;
+INSERT INTO categories VALUES(1,'Smartphones',1);
+INSERT INTO categories VALUES(2,'Laptops',1);
+INSERT INTO categories VALUES(3,'Men Wear',2);
+INSERT INTO categories VALUES(4,'Women Wear',2);
+INSERT INTO categories VALUES(5,'Fiction',3);
+INSERT INTO categories VALUES(6,'Non-Fiction',3);
+INSERT INTO categories VALUES(7,'Action Figures',4);
+INSERT INTO categories VALUES(8,'Board Games',4);
+INSERT INTO categories VALUES(9,'Refrigerators',5);
+INSERT INTO categories VALUES(10,'Microwaves',5);
+INSERT INTO categories VALUES(11,'Bicycles',6);
+INSERT INTO categories VALUES(12,'Treadmills',6);
+INSERT INTO categories VALUES(13,'Sofas',7);
+INSERT INTO categories VALUES(14,'Beds',7);
+INSERT INTO categories VALUES(15,'Makeup',8);
+INSERT INTO categories VALUES(16,'Skincare',8);
+INSERT INTO categories VALUES(17,'Vegetables',9);
+INSERT INTO categories VALUES(18,'Fruits',9);
+INSERT INTO categories VALUES(19,'Car Accessories',10);
+INSERT INTO categories VALUES(20,'Motorcycles',10);
+INSERT INTO categories VALUES(21,'Plants',11);
+INSERT INTO categories VALUES(22,'Gardening Tools',11);
+INSERT INTO categories VALUES(23,'Paper',12);
+INSERT INTO categories VALUES(24,'Pens',12);
+INSERT INTO categories VALUES(25,'Guitars',13);
+INSERT INTO categories VALUES(26,'Drums',13);
+INSERT INTO categories VALUES(27,'Dog Food',14);
+INSERT INTO categories VALUES(28,'Cat Food',14);
+INSERT INTO categories VALUES(29,'Vitamins',15);
+INSERT INTO categories VALUES(30,'Medicines',15);
 
--- Insert values into users
-INSERT INTO users (name, username, password, address, image_path, email) VALUES
-  ('John Doe', 'johndoe', 'password123', '123 Main St', 'path/to/user1.jpg', 'johndoe@example.com'),
-  ('Jane Smith', 'janesmith', 'password123', '456 Elm St', 'path/to/user2.jpg', 'janesmith@example.com'),
-  ('Alice Johnson', 'alicej', 'password123', '789 Oak St', 'path/to/user3.jpg', 'alicej@example.com'),
-  ('Bob Brown', 'bobbrown', 'password123', '101 Pine St', 'path/to/user4.jpg', 'bobbrown@example.com'),
-  ('Charlie Davis', 'charlied', 'password123', '202 Birch St', 'path/to/user5.jpg', 'charlied@example.com'),
-  ('David Evans', 'davide', 'password123', '303 Maple St', 'path/to/user6.jpg', 'davide@example.com'),
-  ('Eva Green', 'evagreen', 'password123', '404 Cedar St', 'path/to/user7.jpg', 'evagreen@example.com'),
-  ('Frank Harris', 'frankh', 'password123', '505 Walnut St', 'path/to/user8.jpg', 'frankh@example.com'),
-  ('Grace Lee', 'gracelee', 'password123', '606 Chestnut St', 'path/to/user9.jpg', 'gracelee@example.com'),
-  ('Henry Miller', 'henrym', 'password123', '707 Ash St', 'path/to/user10.jpg', 'henrym@example.com'),
-  ('Ivy Nelson', 'ivyn', 'password123', '808 Birch St', 'path/to/user11.jpg', 'ivyn@example.com'),
-  ('Jack Owens', 'jacko', 'password123', '909 Pine St', 'path/to/user12.jpg', 'jacko@example.com'),
-  ('Karen Perez', 'karenp', 'password123', '1010 Elm St', 'path/to/user13.jpg', 'karenp@example.com'),
-  ('Leo Quinn', 'leoq', 'password123', '1111 Maple St', 'path/to/user14.jpg', 'leoq@example.com'),
-  ('Mia Rodriguez', 'miar', 'password123', '1212 Oak St', 'path/to/user15.jpg', 'miar@example.com'),
-  ('Nina Scott', 'ninas', 'password123', '1313 Cedar St', 'path/to/user16.jpg', 'ninas@example.com'),
-  ('Oliver Turner', 'olivert', 'password123', '1414 Walnut St', 'path/to/user17.jpg', 'olivert@example.com'),
-  ('Paulina Walker', 'paulinaw', 'password123', '1515 Chestnut St', 'path/to/user18.jpg', 'paulinaw@example.com'),
-  ('Quincy Young', 'quincy', 'password123', '1616 Ash St', 'path/to/user19.jpg', 'quincy@example.com'),
-  ('Rachel Zane', 'rachelz', 'password123', '1717 Birch St', 'path/to/user20.jpg', 'rachelz@example.com'),
-  ('Sam Adams', 'sama', 'password123', '1818 Pine St', 'path/to/user21.jpg', 'sama@example.com'),
-  ('Tina Bell', 'tinab', 'password123', '1919 Elm St', 'path/to/user22.jpg', 'tinab@example.com'),
-  ('Uma Carter', 'umac', 'password123', '2020 Maple St', 'path/to/user23.jpg', 'umac@example.com'),
-  ('Victor Diaz', 'victord', 'password123', '2121 Oak St', 'path/to/user24.jpg', 'victord@example.com'),
-  ('Wendy Edwards', 'wendye', 'password123', '2222 Cedar St', 'path/to/user25.jpg', 'wendye@example.com'),
-  ('Xander Fox', 'xanderf', 'password123', '2323 Walnut St', 'path/to/user26.jpg', 'xanderf@example.com'),
-  ('Yara Gomez', 'yarag', 'password123', '2424 Chestnut St', 'path/to/user27.jpg', 'yarag@example.com'),
-  ('Zach Hunter', 'zachh', 'password123', '2525 Ash St', 'path/to/user28.jpg', 'zachh@example.com'),
-  ('Amy Johnson', 'amyj', 'password123', '2626 Birch St', 'path/to/user29.jpg', 'amyj@example.com'),
-  ('Brian King', 'briank', 'password123', '2727 Pine St', 'path/to/user30.jpg', 'briank@example.com')
-ON CONFLICT DO NOTHING;
 
--- Insert values into reviews
-INSERT INTO reviews (name, description, image_path, score, product_id, user_id) VALUES
-  ('Great Phone', 'Love the new features', 'path/to/review1.jpg', 5, 1, 1),
-  ('Amazing Laptop', 'Best laptop I have used', 'path/to/review2.jpg', 5, 2, 2),
-  ('Good T-Shirt', 'Very comfortable', 'path/to/review3.jpg', 4, 3, 3),
-  ('Beautiful Dress', 'Fits perfectly', 'path/to/review4.jpg', 5, 4, 4),
-  ('Classic Read', 'Timeless novel', 'path/to/review5.jpg', 5, 5, 5),
-  ('Excellent Camera', 'High quality photos', 'path/to/review6.jpg', 5, 16, 6),
-  ('Great Sound', 'Amazing audio quality', 'path/to/review7.jpg', 5, 15, 7),
-  ('Very Comfortable', 'Best running shoes I have worn', 'path/to/review8.jpg', 5, 11, 8),
-  ('Highly Recommend', 'Great smart speaker', 'path/to/review9.jpg', 5, 27, 9),
-  ('Powerful Performance', 'High performance laptop', 'path/to/review10.jpg', 5, 7, 10),
-  ('Great Picture Quality', 'Amazing TV', 'path/to/review11.jpg', 5, 12, 11),
-  ('Very Useful', 'Great for cooking', 'path/to/review12.jpg', 5, 14, 12),
-  ('Great Gaming Console', 'Love playing on this', 'path/to/review13.jpg', 5, 23, 13),
-  ('Awesome Design', 'Looks great in my living room', 'path/to/review14.jpg', 5, 13, 14),
-  ('Good Sound', 'Clear and crisp audio', 'path/to/review15.jpg', 5, 15, 15),
-  ('Great Fit', 'Perfect size for me', 'path/to/review16.jpg', 5, 8, 16),
-  ('Fast and Efficient', 'Cleans dishes quickly', 'path/to/review17.jpg', 5, 19, 17),
-  ('Very Convenient', 'Helps me stay fit', 'path/to/review18.jpg', 5, 28, 18),
-  ('Fantastic Gaming', 'Great experience', 'path/to/review19.jpg', 5, 25, 19),
-  ('High Quality', 'Great build quality', 'path/to/review20.jpg', 5, 20, 20),
-  ('Great Buy', 'Excellent value for money', 'path/to/review21.jpg', 5, 21, 21),
-  ('Highly Recommend', 'Would buy again', 'path/to/review22.jpg', 5, 22, 22),
-  ('Perfect Size', 'Fits perfectly in my kitchen', 'path/to/review23.jpg', 5, 18, 23),
-  ('Amazing Device', 'Very smart and useful', 'path/to/review24.jpg', 5, 17, 24),
-  ('Great Sound', 'Love the audio quality', 'path/to/review25.jpg', 5, 15, 25),
-  ('Highly Functional', 'Does everything I need', 'path/to/review26.jpg', 5, 22, 26),
-  ('Excellent Value', 'Worth every penny', 'path/to/review27.jpg', 5, 27, 27),
-  ('Great Product', 'Very satisfied', 'path/to/review28.jpg', 5, 30, 28),
-  ('Awesome Performance', 'Very powerful', 'path/to/review29.jpg', 5, 24, 29),
-  ('Highly Recommend', 'Amazing laptop', 'path/to/review30.jpg', 5, 7, 30)
-ON CONFLICT DO NOTHING;
+INSERT INTO products VALUES(1,'iPhone 13','Latest Apple smartphone','https://m.media-amazon.com/images/I/61eEYLATF9L._AC_UY327_FMwebp_QL65_.jpg',50,1,999.99000000000000908,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(2,'MacBook Pro','High performance laptop','https://m.media-amazon.com/images/I/71FB1Or+44L._AC_UY327_FMwebp_QL65_.jpg',30,2,1999.990000000000009,'15 inch','Silver','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(3,'Men T-Shirt','Comfortable cotton t-shirt','https://m.media-amazon.com/images/I/816tBnZv9JL._AC_UL480_FMwebp_QL65_.jpg',100,3,19.989999999999998436,'L','Blue','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(4,'Women Dress','Elegant evening dress','https://m.media-amazon.com/images/I/61QGXDp0RfL._MCnd_AC_UL480_FMwebp_QL65_.jpg',40,4,79.989999999999994882,'M','Red','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(5,'The Great Gatsby','Classic novel by F. Scott Fitzgerald','https://m.media-amazon.com/images/I/61z0MrB6qOS._AC_UY327_FMwebp_QL65_.jpg',200,5,10.990000000000000213,'N/A','N/A','Fiction','2024-06-18 15:13:32');
+INSERT INTO products VALUES(6,'Samsung Galaxy S21','New generation Samsung smartphone','https://m.media-amazon.com/images/I/61Jc3bWp8jL._AC_UY327_FMwebp_QL65_.jpg',60,1,899.99000000000000908,'N/A','White','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(7,'Dell XPS 13','Ultra portable laptop','https://m.media-amazon.com/images/I/81RuPUPW0NL._AC_UY327_FMwebp_QL65_.jpg',25,2,1399.990000000000009,'13 inch','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(8,'Women Jeans','Stylish and comfortable','https://m.media-amazon.com/images/I/7146Z+7dqOL._AC_UL480_FMwebp_QL65_.jpg',70,4,49.99000000000000199,'M','Blue','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(9,'Apple iPad','Latest model','https://m.media-amazon.com/images/I/71VbHaAqbML._AC_UY327_FMwebp_QL65_.jpg',80,1,799.99000000000000908,'10 inch','Space Gray','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(10,'Sony WH-1000XM4','Noise cancelling headphones','https://m.media-amazon.com/images/I/61EJsH0M3rL._AC_UY327_FMwebp_QL65_.jpg',90,1,349.9900000000000091,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(11,'Nike Running Shoes','Comfortable running shoes','https://m.media-amazon.com/images/I/813lieDer3L._AC_UL480_FMwebp_QL65_.jpg',120,3,69.989999999999994882,'10','Red','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(12,'LG OLED TV','High quality OLED TV','https://m.media-amazon.com/images/I/81CdG7U9AmL._AC_UY327_FMwebp_QL65_.jpg',15,1,2999.9899999999997816,'55 inch','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(13,'Adidas Jacket','Warm and stylish jacket','https://m.media-amazon.com/images/I/61-Fc0vX8hL._AC_UL480_FMwebp_QL65_.jpg',50,3,99.989999999999994882,'L','Green','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(14,'KitchenAid Mixer','High performance mixer','https://m.media-amazon.com/images/I/613IQeWeFBL._AC_UY327_FMwebp_QL65_.jpg',30,5,199.99000000000000908,'N/A','Red','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(15,'Bose SoundLink','Portable Bluetooth speaker','https://m.media-amazon.com/images/I/71L9o0-0SML._AC_UY327_FMwebp_QL65_.jpg',45,1,129.99000000000000909,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(16,'Canon EOS R','High quality mirrorless camera','https://m.media-amazon.com/images/I/813Br987P5L._AC_UY327_FMwebp_QL65_.jpg',20,1,2499.9899999999997816,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(17,'Nest Thermostat','Smart thermostat','https://m.media-amazon.com/images/I/71UIpjIJuVL._AC_UL480_FMwebp_QL65_.jpg',35,1,249.9900000000000091,'N/A','White','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(18,'Samsung Fridge','Large capacity refrigerator','https://m.media-amazon.com/images/I/61+B0dvadVL._AC_UY327_FMwebp_QL65_.jpg',25,9,1499.990000000000009,'N/A','Silver','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(19,'Bosch Dishwasher','Efficient and quiet','https://m.media-amazon.com/images/I/61KL9wYE4zL._AC_UY327_FMwebp_QL65_.jpg',20,9,799.99000000000000908,'N/A','White','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(20,'Dyson Vacuum','Powerful vacuum cleaner','https://m.media-amazon.com/images/I/51RpUuskktL._AC_UY327_FMwebp_QL65_.jpg',40,9,499.99000000000000908,'N/A','Silver','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(21,'Asus ROG Laptop','Gaming laptop with high specs','https://m.media-amazon.com/images/I/81loho4TKpL._AC_UY327_FMwebp_QL65_.jpg',10,2,1599.990000000000009,'17 inch','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(22,'HP OfficeJet Printer','All-in-one printer','https://m.media-amazon.com/images/I/71Uvdc8buML._AC_UY327_FMwebp_QL65_.jpg',60,1,229.99000000000000909,'N/A','White','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(23,'Sony PlayStation 5','Next-gen gaming console','https://m.media-amazon.com/images/I/61WiphT2PlL._AC_UY327_FMwebp_QL65_.jpg',100,18,499.99000000000000908,'N/A','White','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(24,'Xbox Series X','Microsoft gaming console','https://m.media-amazon.com/images/I/51mpJpTdQ4L._AC_UY327_FMwebp_QL65_.jpg',90,18,499.99000000000000908,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(25,'Nintendo Switch','Portable gaming console','https://m.media-amazon.com/images/I/71KC3J22BEL._AC_UY327_FMwebp_QL65_.jpg',110,18,299.99000000000000909,'N/A','Red/Blue','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(26,'Logitech Mouse','Wireless computer mouse','https://m.media-amazon.com/images/I/61N+CzcA8vL._AC_UY327_FMwebp_QL65_.jpg',150,1,29.989999999999998436,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(27,'Amazon Echo','Smart speaker with Alexa','https://m.media-amazon.com/images/I/51dbJ5yt-eL._AC_UY327_FMwebp_QL65_.jpg',80,1,99.989999999999994882,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(28,'Fitbit Charge 4','Fitness tracker with GPS','https://m.media-amazon.com/images/I/61YXnbbNrgL._AC_UY327_FMwebp_QL65_.jpg',70,1,129.99000000000000909,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(29,'Roku Streaming Stick','HD streaming device','https://m.media-amazon.com/images/I/71180MUFI+L._AC_UY327_FMwebp_QL65_.jpg',60,1,49.99000000000000199,'N/A','Black','N/A','2024-06-18 15:13:32');
+INSERT INTO products VALUES(30,'Google Nest Hub','Smart display with Google Assistant','https://m.media-amazon.com/images/I/71ZtwVEmcJL._AC_UY327_FMwebp_QL65_.jpg',50,1,99.989999999999994882,'N/A','White','N/A','2024-06-18 15:13:32');
 
--- Insert values into carts
-INSERT INTO carts (user_id) VALUES
-  (1),
-  (2),
-  (3),
-  (4),
-  (5),
-  (6),
-  (7),
-  (8),
-  (9),
-  (10),
-  (11),
-  (12),
-  (13),
-  (14),
-  (15),
-  (16),
-  (17),
-  (18),
-  (19),
-  (20),
-  (21),
-  (22),
-  (23),
-  (24),
-  (25),
-  (26),
-  (27),
-  (28),
-  (29),
-  (30)
-ON CONFLICT DO NOTHING;
 
--- Insert values into products_carts
-INSERT INTO products_carts (cart_id, products_id) VALUES
-  (1, 1),
-  (1, 2),
-  (2, 3),
-  (3, 4),
-  (4, 5),
-  (5, 6),
-  (6, 7),
-  (7, 8),
-  (8, 9),
-  (9, 10),
-  (10, 11),
-  (11, 12),
-  (12, 13),
-  (13, 14),
-  (14, 15),
-  (15, 16),
-  (16, 17),
-  (17, 18),
-  (18, 19),
-  (19, 20),
-  (20, 21),
-  (21, 22),
-  (22, 23),
-  (23, 24),
-  (24, 25),
-  (25, 26),
-  (26, 27),
-  (27, 28),
-  (28, 29),
-  (29, 30)
-ON CONFLICT DO NOTHING;
+INSERT INTO users VALUES(1,'John Doe','johndoe','johndoe@example.com','$2a$10$kSRUipJJ9FerJWeqf5ARbuXFW4IUPm6CF3sDx4igjwt68HMCBJDs6','123 Main St','path/to/user1.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(2,'Jane Smith','janesmith','janesmith@example.com','$2a$10$ExNlemDm68kp9OHa/c1N6OAii4BQbZKP9FHf2Pvni3aMvTv1JUwpm','456 Elm St','path/to/user2.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(3,'Alice Johnson','alicej','alicej@example.com','$2a$10$Xoek4.90Y/qjJH7RlCap6.teuMiEyY6zrGM8TEMDi04ytOe9E/Qiq','789 Oak St','path/to/user3.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(4,'Bob Brown','bobbrown','bobbrown@example.com','$2a$10$.s4IKC/aboemIN6hIzxoU.6SFlvs4ddfedOHO01qkJKOdPM9RGVny','101 Pine St','path/to/user4.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(5,'Charlie Davis','charlied','charlied@example.com','$2a$10$XLW3KEO2sughlYZ354ryAOysA5eWiuoKrmVO4FQL7RErJ5/vhH1q6','202 Birch St','path/to/user5.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(6,'David Evans','davide','davide@example.com','$2a$10$ediv1Vd9A3kLpX9s7jIR3OPkphqi4gsLOcuZqM5rlbTi3rAFtn8RK','303 Maple St','path/to/user6.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(7,'Eva Green','evagreen','evagreen@example.com','$2a$10$v092cqK1JrkfZIYtn2zrSe3UmiDpNgDVSw8Djb.1KKYv279adYV4O','404 Cedar St','path/to/user7.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(8,'Frank Harris','frankh','frankh@example.com','$2a$10$HKJt.o9UgVWn9hLuE0iJKeOfOyjQBc7i4vX4jZ3v1VdgU6HJbm912','505 Walnut St','path/to/user8.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(9,'Grace Lee','gracelee','gracelee@example.com','$2a$10$FG4DrvA6Wj5ctv6ckXui8OLEKpV4kacimTblsGUKsIJergZ5Vh6UC','606 Chestnut St','path/to/user9.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(10,'Henry Miller','henrym','henrym@example.com','$2a$10$SzRHkh2CcwjKKohIrZwfJ.6M9NBRU4I/kUi1wbExe4cqwKp4Qh9S2','707 Ash St','path/to/user10.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(11,'Ivy Nelson','ivyn','ivyn@example.com','$2a$10$dIFeHq0DQ1bmwWCFXJ7Y/emQwzKZXDbZKYvNU0BEm/mrBrgPVaKES','808 Birch St','path/to/user11.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(12,'Jack Owens','jacko','jacko@example.com','$2a$10$YKVKJSqxHH.BU1AAXNZgtu5dE0qFLzt6GfacHZ6ETN57r3lr1fh6C','909 Pine St','path/to/user12.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(13,'Karen Perez','karenp','karenp@example.com','$2a$10$xw1Wgr2856fHyXFPya6liOg86fMiU647lBljyZ0rB4paUhVW4JgR2','1010 Elm St','path/to/user13.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(14,'Leo Quinn','leoq','leoq@example.com','$2a$10$qUUoW6vnJvLjDl9cRhQoguG36FUR7oJWgs7L2YH8UBtltEIufECCG','1111 Maple St','path/to/user14.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(15,'Mia Rodriguez','miar','miar@example.com','$2a$10$jZMxRZ0aDf6K95MYDi1S8uG5F9qlXOH4gutq101HcrFjs6XthcB66','1212 Oak St','path/to/user15.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(16,'Nina Scott','ninas','ninas@example.com','$2a$10$KmXXZhgHTpx1LCcb9h9u4OuuxG.WUL.CNh4qNvI1i5FQFrrFdjVsC','1313 Cedar St','path/to/user16.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(17,'Oliver Turner','olivert','olivert@example.com','$2a$10$hJaaxhEwX/4snuy0BXM/suDSfohSTxKsffwfMHlpTBEpQ/0VYPyFW','1414 Walnut St','path/to/user17.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(18,'Paulina Walker','paulinaw','paulinaw@example.com','$2a$10$fbg58dDTvp5WdJTr6deVJuig2cwWMyHCwJs4xfQ95agECVZsFpW.W','1515 Chestnut St','path/to/user18.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(19,'Quincy Young','quincy','quincy@example.com','$2a$10$o5CT9it9N4svKrhOe9SmVOK67ZOajPp2H7NbXigGDqZaXaoacBaAO','1616 Ash St','path/to/user19.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(20,'Rachel Zane','rachelz','rachelz@example.com','$2a$10$9ZdNJrgRiic.nAIMAV6EZe3xPA.WvMvH0y.85D0AGxEVlFzsPu1uK','1717 Birch St','path/to/user20.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(21,'Sam Adams','sama','sama@example.com','$2a$10$2bdIB3BqAo96JZzt3ffmO.B.1qyjh31OEaHrpBpAvDxZNvC1efpU2','1818 Pine St','path/to/user21.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(22,'Tina Bell','tinab','tinab@example.com','$2a$10$lNmYAcemdMjRJZxjZFi0o.QLCDhLEHIPNHHCcdTbmO/ebfvMn3kDi','1919 Elm St','path/to/user22.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(23,'Uma Carter','umac','umac@example.com','$2a$10$Z1aZLaZtmigpnbKT5awBJuNCQbEG8MluTK1PuESawdx3bzuuTjWWC','2020 Maple St','path/to/user23.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(24,'Victor Diaz','victord','victord@example.com','$2a$10$MMaWi9b5a/zUURPTYZJyO.QWWJJPtLP/LALCkPP842cgWGSB1XlgG','2121 Oak St','path/to/user24.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(25,'Wendy Edwards','wendye','wendye@example.com','$2a$10$Exu5J22bxnI/ns/3vESLRO1vEJLLfORStZe.nP.Ua8OkMwqp.0NxW','2222 Cedar St','path/to/user25.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(26,'Xander Fox','xanderf','xanderf@example.com','$2a$10$MLqWeo1tJYN6firW6c4wLum6M0i/e6RbUFQ4YUhdOeQD7eWVP3epa','2323 Walnut St','path/to/user26.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(27,'Yara Gomez','yarag','yarag@example.com','$2a$10$tcgtoJxOGTngyHqPB0TmIeX7L12JLc2JW26yMMWvxBU.0y33XsUw.','2424 Chestnut St','path/to/user27.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(28,'Zach Hunter','zachh','zachh@example.com','$2a$10$zEh6jvRcwk2qtJzP1vX9KeWktNSIryNOHL9qXCHDXpoRJpagzk1NS','2525 Ash St','path/to/user28.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(29,'Amy Johnson','amyj','amyj@example.com','$2a$10$I7ohCSZtYmjc2MT4L2trseiDm8xAk2AlQJzEZ/RNpWJ.TuGd10fUu','2626 Birch St','path/to/user29.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(30,'Brian King','briank','briank@example.com','$2a$10$O8j1OFDx.2P25kFBdw/S8OwJdHV2Zkq1W9C.lzPg/1pdePFmSZxBa','2727 Pine St','path/to/user30.jpg','2024-06-18 15:13:32');
+INSERT INTO users VALUES(31,'Alexasdfnder','','alexsdf@gmail.com','$2a$10$9r0totU.5lbrr7y4PMx1MOHeliDF7XVLM.btJoLJVPIDkHDKdwkhi','','','2024-06-18 15:13:52');
 
--- Insert values into sessions
-INSERT INTO sessions (user_id) VALUES
-  (1),
-  (2),
-  (3),
-  (4),
-  (5),
-  (6),
-  (7),
-  (8),
-  (9),
-  (10),
-  (11),
-  (12),
-  (13),
-  (14),
-  (15),
-  (16),
-  (17),
-  (18),
-  (19),
-  (20),
-  (21),
-  (22),
-  (23),
-  (24),
-  (25),
-  (26),
-  (27),
-  (28),
-  (29),
-  (30)
-ON CONFLICT DO NOTHING;
+
+INSERT INTO reviews VALUES(1,'Great Phone','Love the new features','path/to/review1.jpg',5,1,1,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(2,'Amazing Laptop','Best laptop I have used','path/to/review2.jpg',5,2,2,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(3,'Good T-Shirt','Very comfortable','path/to/review3.jpg',4,3,3,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(4,'Beautiful Dress','Fits perfectly','path/to/review4.jpg',5,4,4,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(5,'Classic Read','Timeless novel','path/to/review5.jpg',5,5,5,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(6,'Excellent Camera','High quality photos','path/to/review6.jpg',5,16,6,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(7,'Great Sound','Amazing audio quality','path/to/review7.jpg',5,15,7,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(8,'Very Comfortable','Best running shoes I have worn','path/to/review8.jpg',5,11,8,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(9,'Highly Recommend','Great smart speaker','path/to/review9.jpg',5,27,9,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(10,'Powerful Performance','High performance laptop','path/to/review10.jpg',5,7,10,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(11,'Great Picture Quality','Amazing TV','path/to/review11.jpg',5,12,11,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(12,'Very Useful','Great for cooking','path/to/review12.jpg',5,14,12,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(13,'Great Gaming Console','Love playing on this','path/to/review13.jpg',5,23,13,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(14,'Awesome Design','Looks great in my living room','path/to/review14.jpg',5,13,14,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(15,'Good Sound','Clear and crisp audio','path/to/review15.jpg',5,15,15,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(16,'Great Fit','Perfect size for me','path/to/review16.jpg',5,8,16,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(17,'Fast and Efficient','Cleans dishes quickly','path/to/review17.jpg',5,19,17,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(18,'Very Convenient','Helps me stay fit','path/to/review18.jpg',5,28,18,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(19,'Fantastic Gaming','Great experience','path/to/review19.jpg',5,25,19,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(20,'High Quality','Great build quality','path/to/review20.jpg',5,20,20,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(21,'Great Buy','Excellent value for money','path/to/review21.jpg',5,21,21,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(22,'Highly Recommend','Would buy again','path/to/review22.jpg',5,22,22,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(23,'Perfect Size','Fits perfectly in my kitchen','path/to/review23.jpg',5,18,23,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(24,'Amazing Device','Very smart and useful','path/to/review24.jpg',5,17,24,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(25,'Great Sound','Love the audio quality','path/to/review25.jpg',5,15,25,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(26,'Highly Functional','Does everything I need','path/to/review26.jpg',5,22,26,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(27,'Excellent Value','Worth every penny','path/to/review27.jpg',5,27,27,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(28,'Great Product','Very satisfied','path/to/review28.jpg',5,30,28,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(29,'Awesome Performance','Very powerful','path/to/review29.jpg',5,24,29,'2024-06-18 15:13:32');
+INSERT INTO reviews VALUES(30,'Highly Recommend','Amazing laptop','path/to/review30.jpg',5,7,30,'2024-06-18 15:13:32');
+
+
+INSERT INTO carts VALUES(1,1,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(2,2,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(3,3,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(4,4,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(5,5,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(6,6,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(7,7,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(8,8,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(9,9,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(10,10,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(11,11,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(12,12,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(13,13,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(14,14,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(15,15,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(16,16,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(17,17,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(18,18,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(19,19,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(20,20,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(21,21,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(22,22,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(23,23,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(24,24,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(25,25,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(26,26,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(27,27,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(28,28,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(29,29,'2024-06-18 15:13:32');
+INSERT INTO carts VALUES(30,30,'2024-06-18 15:13:32');
+
+
+INSERT INTO products_carts VALUES(1,1,1,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(2,1,2,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(3,2,3,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(4,3,4,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(5,4,5,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(6,5,6,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(7,6,7,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(8,7,8,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(9,8,9,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(10,9,10,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(11,10,11,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(12,11,12,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(13,12,13,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(14,13,14,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(15,14,15,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(16,15,16,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(17,16,17,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(18,17,18,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(19,18,19,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(20,19,20,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(21,20,21,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(22,21,22,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(23,22,23,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(24,23,24,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(25,24,25,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(26,25,26,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(27,26,27,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(28,27,28,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(29,28,29,'2024-06-18 15:13:32');
+INSERT INTO products_carts VALUES(30,29,30,'2024-06-18 15:13:32');
+
+
+INSERT INTO sessions VALUES(1,1,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(2,2,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(3,3,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(4,4,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(5,5,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(6,6,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(7,7,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(8,8,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(9,9,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(10,10,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(11,11,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(12,12,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(13,13,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(14,14,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(15,15,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(16,16,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(17,17,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(18,18,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(19,19,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(20,20,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(21,21,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(22,22,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(23,23,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(24,24,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(25,25,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(26,26,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(27,27,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(28,28,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(29,29,'2024-06-18 15:13:32',NULL);
+INSERT INTO sessions VALUES(30,30,'2024-06-18 15:13:32',NULL);
 
 COMMIT;

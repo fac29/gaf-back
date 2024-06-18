@@ -343,16 +343,24 @@ export async function sqlUpdateUser(userId: number, newContent: any) {
 	}
 }
 
-export async function sqlCreateUser(newContent: any) {
+// Create User
+export async function sqlCreateUser(
+	name: string,
+	username: string,
+	password: string,
+	address: string,
+	imagePath: string,
+	email: string,
+) {
 	try {
 		const insertUser = await db
 			.prepare(
 				`
-                INSERT INTO users (content)
-                VALUES (?)
+                INSERT INTO users (name, username, password, address, image_path, email)
+                VALUES (?, ?, ?, ?, ?, ?)
                 `,
 			)
-			.run(newContent);
+			.run(name, username, password, address, imagePath, email);
 
 		if (insertUser.changes === 0) {
 			return `Failed to create a new user`;
@@ -360,29 +368,37 @@ export async function sqlCreateUser(newContent: any) {
 			return `New user with id ${insertUser.lastInsertRowid} was successfully created`;
 		}
 	} catch (error) {
+		if (error instanceof Error) {
+		  if (error.message.includes('UNIQUE constraint failed')) {
+			return `Error: Email already exists`;
+		  } else {
+			console.log(error.message);
+			return error.message;
+		  }
+		} else {
+		  console.log('Unknown error occurred');
+		  return 'Unknown error occurred';
+		}
+	  }
+	}
+
+// Create session
+export async function sqlCreateSession(userId: number, expires_at: string) {
+	try {
+		const insertSession = await db.prepare(
+			`
+		INSERT INTO sessions ( user_id, expires_at)
+		VALUES ( ?, ?)
+		`,
+		);
+		const result = insertSession.run(userId, expires_at);
+		if (result.changes === 0) {
+			return `Failed to create a new session`;
+		} else {
+			return `New session with id ${result.lastInsertRowid} was successfully created`;
+		}
+	} catch (error) {
 		console.log((error as Error).message);
 		return (error as Error).message;
 	}
 }
-
-// Create session
-export async function sqlCreateSession(id: string, userId: number, expiresAt: string) {
-	try {
-	  const insertSession = await db.run(
-		`
-		INSERT INTO sessions (id, user_id, expires_at)
-		VALUES (?, ?, ?)
-		`,
-		[id, userId, expiresAt]
-	  );
-  
-	  if (insertSession.changes === 0) {
-		return `Failed to create a new session`;
-	  } else {
-		return `New session with id ${insertSession.lastID} was successfully created`;
-	  }
-	} catch (error) {
-	  console.log((error as Error).message);
-	  return (error as Error).message;
-	}
-  }

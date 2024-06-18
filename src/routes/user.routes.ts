@@ -57,11 +57,19 @@ export function Users(app: Express) {
 	});
 	//
 	app.post('/user', async (req: Request, res: Response) => {
-		const newContent = req.body.content;
+		const { name, username, password, address, imagePath, email } = req.body;
 
 		try {
-			const newUser = await sqlCreateUser(newContent);
-			res.send(newUser);
+			// Create the user in the DB
+			const newUser = await sqlCreateUser(
+				name,
+				username,
+				password,
+				address,
+				imagePath,
+				email,
+			);
+			res.status(201).send(newUser);
 		} catch (error) {
 			res.send((error as Error).message);
 			console.log((error as Error).message);
