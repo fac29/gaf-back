@@ -3,6 +3,7 @@ import {
 	sqlCreateSession,
 	sqlFetchUserByEmail,
 	sqlCreateUser,
+	sqlDeleteSession,
 } from '../sqlStatements/sqlStatements';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
@@ -21,18 +22,19 @@ export function Auth(app: Express) {
 					).toISOString(); // 7 days from now
 
 					const sessionId = await sqlCreateSession(user.id, expiresAt);
-					console.log (`Created SessionID: ${sessionId} `)
+					console.log(`Created SessionID: ${sessionId}`);
 
-					if (typeof sessionId === 'string') {
-						return res.status(500).send(sessionId);
+					if (typeof sessionId !== 'number') {
+						throw new Error('Failed to create session');
 					}
 
 					res.cookie('sid', sessionId, {
 						signed: true,
 						httpOnly: true,
-						maxAge: 604800000,
+						maxAge: 604800000, // 7 days
 						sameSite: 'lax',
 					});
+
 					res.status(200).json({ message: 'Login successful' });
 				} else {
 					res.status(401).json({ message: 'Invalid email or password' });
@@ -41,11 +43,40 @@ export function Auth(app: Express) {
 				res.status(401).json({ message: 'Invalid email or password' });
 			}
 		} catch (error) {
-			if (error instanceof Error) {
-				res.status(500).json({ message: error.message });
-			} else {
-				res.status(500).json({ message: 'An unknown error occurred' });
+			console.error('Error during login:', error);
+			res
+				.status(500)
+				.json({
+					message:
+						error instanceof Error
+							? error.message
+							: 'An unknown error occurred',
+				});
+		}
+	});
+
+	app.post('/logout', async (req, res) => {
+		try {
+			const sessionId = req.signedCookies.sid;
+			if (!sessionId) {
+				return res
+					.status(400)
+					.json({ message: 'No session ID found in cookies' });
 			}
+
+			const result = await sqlDeleteSession(sessionId);
+			res.clearCookie('sid');
+			res.status(200).json({ message: 'Logout successful', result });
+		} catch (error) {
+			console.error('Error during logout:', error);
+			res
+				.status(500)
+				.json({
+					message:
+						error instanceof Error
+							? error.message
+							: 'An unknown error occurred',
+				});
 		}
 	});
 
@@ -78,7 +109,7 @@ export function Auth(app: Express) {
 				email,
 			);
 
-			console.log(`Created User: ${userResult}`)
+			console.log(`Created User: ${userResult}`);
 
 			//Check if we get a wrong answer
 			if (typeof userResult === 'string') {

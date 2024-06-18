@@ -6,8 +6,9 @@ import { Users } from './routes/user.routes';
 import { Auth } from './routes/auth.routes'
 import { Cart } from './routes/cart.routes';
 import { Reviews } from './routes/review.routes';
-const cors = require('cors');
+import cors from 'cors';
 import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser';
 
 const app: Express = express();
 dotenv.config();
@@ -20,7 +21,8 @@ app.use(
 );
 app.use(express.json());
 
-app.use(cookieParser('hlkjfdlsadf'))
+app.use(bodyParser.json());
+app.use(cookieParser('hlkjfasdfasdfasdfasddfasdfasdfas123321dlsadf'))
 
 // Create a new SQLite database (or open an existing one)
 const db = new sqlite3.Database(':memory:');
