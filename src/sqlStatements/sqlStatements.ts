@@ -365,7 +365,6 @@ export async function sqlCreateUser(newContent: any) {
 	}
 }
 
-
 // Create session
 export async function sqlCreateSession(id: string, userId: number, expiresAt: string) {
 	try {
