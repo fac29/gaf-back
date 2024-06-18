@@ -190,24 +190,20 @@ export async function sqlDeleteReview(reviewId: number) {
 	}
 }
 
-export async function sqlFetchReview(reviewId: number) {
+export async function sqlFetchReviews(productId: number) {
 	try {
 		const fetchReview = await db
 			.prepare(
 				`
                 SELECT * FROM reviews
-                WHERE id =?
+                WHERE product_id =?
                 `,
 			)
-			.all(reviewId);
-		if (fetchReview.length === 0) {
-			return `Review was not found in the database`;
-		} else {
-			return fetchReview;
-		}
+			.all(productId);
+		return fetchReview;
 	} catch (error) {
 		console.log((error as Error).message);
-		return (error as Error).message;
+		return [];
 	}
 }
 
@@ -369,18 +365,18 @@ export async function sqlCreateUser(
 		}
 	} catch (error) {
 		if (error instanceof Error) {
-		  if (error.message.includes('UNIQUE constraint failed')) {
-			return `Error: Email already exists`;
-		  } else {
-			console.log(error.message);
-			return error.message;
-		  }
+			if (error.message.includes('UNIQUE constraint failed')) {
+				return `Error: Email already exists`;
+			} else {
+				console.log(error.message);
+				return error.message;
+			}
 		} else {
-		  console.log('Unknown error occurred');
-		  return 'Unknown error occurred';
+			console.log('Unknown error occurred');
+			return 'Unknown error occurred';
 		}
-	  }
 	}
+}
 
 // Create session
 export async function sqlCreateSession(userId: number, expires_at: string) {

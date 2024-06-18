@@ -1,4 +1,4 @@
-import express, { Express, Application, Request, Response } from 'express';
+import express, { Express } from 'express';
 import sqlite3 from 'sqlite3';
 import dotenv from 'dotenv';
 import Products from './routes/product.routes';
@@ -19,13 +19,19 @@ app.use(
 		origin: 'http://localhost:5173',
 	}),
 );
+
 app.use(express.json());
 
 app.use(bodyParser.json());
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(
+	cookieParser(
+		process.env.COOKIE_SECRET ||
+			'jkasdfhjklsf789y34789yp3qihjsdf789uih3r9h7834qrfihupversuih345rtu',
+	),
+);
 
 // Create a new SQLite database (or open an existing one)
-const db = new sqlite3.Database(':memory:');
+// const db = new sqlite3.Database(':memory:');
 
 Products(app);
 Users(app);

@@ -6,7 +6,6 @@ import {
 	sqlDeleteSession,
 } from '../sqlStatements/sqlStatements';
 import bcrypt from 'bcryptjs';
-import crypto from 'crypto';
 
 export function Auth(app: Express) {
 	app.post('/login', async (req, res) => {
