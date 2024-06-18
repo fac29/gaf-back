@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     username TEXT,
-    email TEXT,
+    email TEXT NOT NULL UNIQUE,
     password TEXT,
     address TEXT,
     image_path TEXT,
@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    expires_at DATETIME,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 

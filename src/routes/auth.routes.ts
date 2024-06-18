@@ -12,21 +12,20 @@ export function Auth(app: Express) {
 		try {
 			const { email, password } = req.body;
 			const users = await sqlFetchUserByEmail(email);
-	
 
 			if (Array.isArray(users) && users.length > 0) {
 				const user = users[0]; // Assuming email is unique and we get an array with a single user
 				if (bcrypt.compareSync(password, user.password)) {
-					
 					const expiresAt = new Date(
 						Date.now() + 7 * 24 * 60 * 60 * 1000,
 					).toISOString(); // 7 days from now
 
 					const sessionId = await sqlCreateSession(user.id, expiresAt);
+					console.log (`Created SessionID: ${sessionId} `)
 
 					if (typeof sessionId === 'string') {
 						return res.status(500).send(sessionId);
-					  }
+					}
 
 					res.cookie('sid', sessionId, {
 						signed: true,
@@ -51,10 +50,17 @@ export function Auth(app: Express) {
 	});
 
 	app.post('/signup', async (req, res) => {
+		try {
+			// Retrieve values from the body setting defaults
+			const {
+				name,
+				username = '',
+				password,
+				address = '',
+				imagePath = '',
+				email,
+			} = req.body;
 
-		try{
-			const { name, password, email } = req.body;
-			
 			if (!name || !password || !email) {
 				return res.status(400).send('Bad input');
 			}
@@ -63,13 +69,21 @@ export function Auth(app: Express) {
 			const hashedPassword = await bcrypt.hash(password, 12);
 
 			// Create the user in the DB
-			const userResult = await sqlCreateUser(name, '', hashedPassword, '', '', email);
+			const userResult = await sqlCreateUser(
+				name,
+				username,
+				hashedPassword,
+				address,
+				imagePath,
+				email,
+			);
+
+			console.log(`Created User: ${userResult}`)
 
 			//Check if we get a wrong answer
 			if (typeof userResult === 'string') {
 				return res.status(500).send(userResult);
 			}
-
 			// Fetch the created user to get their ID
 			const users = await sqlFetchUserByEmail(email);
 			if (!Array.isArray(users) || users.length === 0) {
@@ -77,8 +91,32 @@ export function Auth(app: Express) {
 			}
 			const user = users[0];
 
+			// Create the session with the new user's ID
+			const expiresAt = new Date(
+				Date.now() + 7 * 24 * 60 * 60 * 1000,
+			).toISOString(); // 7 days from now
+			const sessionId = await sqlCreateSession(user.id, expiresAt);
+
+			if (typeof sessionId === 'string') {
+				return res.status(500).send(sessionId);
+			}
+
+			// Set a cookie with the session ID
+			res.cookie('sid', sessionId, {
+				signed: true,
+				httpOnly: true,
+				maxAge: 604800000, // 7 days
+				sameSite: 'lax',
+			});
+
+			// Send a success response
+			res.status(200).json({ message: 'Signup successful' });
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ message: error.message });
+			} else {
+				res.status(500).json({ message: 'An unknown error occurred' });
+			}
 		}
-
-
 	});
 }
