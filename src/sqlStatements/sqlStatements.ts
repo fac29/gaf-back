@@ -418,3 +418,25 @@ export async function sqlDeleteSession(sessionId: number) {
 		return (error as Error).message;
 	}
 }
+
+export async function sqlAverageRating(productId: number) {
+	try {
+		const averageRating = await db
+			.prepare(
+				`
+                SELECT ROUND(AVG(reviews.score),1) AS average_score
+				FROM products JOIN reviews ON products.id = reviews.product_id
+                WHERE products.id = ?
+                `,
+			)
+			.all(productId);
+		if (averageRating.length === 0) {
+			return `No rating was found`;
+		} else {
+			return averageRating;
+		}
+	} catch (error) {
+		console.log((error as Error).message);
+		return (error as Error).message;
+	}
+}
