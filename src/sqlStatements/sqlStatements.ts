@@ -296,6 +296,7 @@ export async function sqlFetchUser(userId: number) {
 }
 
 export async function sqlFetchUserByEmail(email: string) {
+	// console.log(email);
 	try {
 		const fetchUserByEmail = await db
 			.prepare(
@@ -306,13 +307,13 @@ export async function sqlFetchUserByEmail(email: string) {
 			)
 			.all(email);
 		if (fetchUserByEmail.length === 0) {
-			return `User was not found in the database`;
+			return `User was not found in the database. Email provided: ${fetchUserByEmail}`;
 		} else {
+			// console.log('sqlStatements fetchUserByEmail:', ...fetchUserByEmail);
 			return fetchUserByEmail;
 		}
 	} catch (error) {
-		console.log((error as Error).message);
-		return (error as Error).message;
+		return error as Error;
 	}
 }
 
@@ -364,17 +365,7 @@ export async function sqlCreateUser(
 			return `New user with id ${insertUser.lastInsertRowid} was successfully created`;
 		}
 	} catch (error) {
-		if (error instanceof Error) {
-			if (error.message.includes('UNIQUE constraint failed')) {
-				return `Error: Email already exists`;
-			} else {
-				console.log(error.message);
-				return error.message;
-			}
-		} else {
-			console.log('Unknown error occurred');
-			return 'Unknown error occurred';
-		}
+		return error as Error;
 	}
 }
 
