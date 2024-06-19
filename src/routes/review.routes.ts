@@ -1,7 +1,7 @@
 import { Express, Request, Response } from 'express';
 import {
 	sqlDeleteReview,
-	sqlFetchReview,
+	sqlFetchReviews,
 	sqlUpdateReview,
 	sqlCreateReview,
 } from '../sqlStatements/sqlStatements';
@@ -27,14 +27,18 @@ export function Reviews(app: Express) {
 		const reviewId: number = parseInt(req.params.id);
 
 		try {
-			const fetchReview = await sqlFetchReview(reviewId);
+			const fetchReview = await sqlFetchReviews(reviewId);
 			if (fetchReview.length < 1) {
-				res.send(`Review with ID ${reviewId} was not found in the database`);
+				res
+					.status(404)
+					.json({
+						message: `Review with ID ${reviewId} was not found in the database`,
+					});
 			} else {
-				res.send(fetchReview);
+				res.status(200).json(fetchReview);
 			}
 		} catch (error) {
-			res.send((error as Error).message);
+			res.status(500).json({ message: (error as Error).message });
 			console.log((error as Error).message);
 		}
 	});
