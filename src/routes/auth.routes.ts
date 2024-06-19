@@ -100,6 +100,18 @@ export function Auth(app: Express) {
 				email,
 			);
 
+			// Catch sql error if not unique
+			if (userResult instanceof Error) {
+				console.log(
+					`Error caught as instance of Error. It is returning: ${userResult}`,
+				);
+				return res
+					.status(400)
+					.json({ message: 'Error signing up, email already exists' });
+			}
+
+			console.log(userResult);
+
 			console.log(`Created User: ${JSON.stringify(userResult)}`);
 
 			//Check if we get a wrong answer
