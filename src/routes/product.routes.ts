@@ -4,6 +4,7 @@ import {
 	sqlFetchProduct,
 	sqlRandomProducts,
 	sqlQueryProducts,
+	sqlAverageRating,
 } from '../sqlStatements/sqlStatements';
 
 export function Products(app: Express) {
@@ -80,6 +81,23 @@ export function Products(app: Express) {
 			console.log((error as Error).message);
 		}
 	});
+
+	app.get('/productscore/:id', async (req: Request, res: Response) => {
+		const productId: number = parseInt(req.params.id);
+		try {
+			const fetchProduct = await sqlAverageRating(productId);
+			if (fetchProduct.length < 1) {
+				res.send(`No rating for ID${productId} was not found in the database`);
+			} else {
+				res.send(fetchProduct);
+			}
+		} catch (error) {
+			res.send((error as Error).message);
+			console.log((error as Error).message);
+		}
+	});
+
+
 }
 
 export default Products;
