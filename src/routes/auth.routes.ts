@@ -132,7 +132,7 @@ export function Auth(app: Express) {
 			res.cookie('sid', sessionId, {
 				signed: true,
 				httpOnly: true,
-				maxAge: 604800000, // 7 days
+				maxAge: 604800000, // 7 days from now
 				sameSite: 'lax',
 			});
 
