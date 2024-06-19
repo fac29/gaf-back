@@ -191,7 +191,6 @@ INSERT INTO reviews VALUES(59,'Great Features','Feature rich and useful','path/t
 INSERT INTO reviews VALUES(60,'Very Functional','Does what it says','path/to/review60.jpg',4,18,31,'2024-06-18 15:13:32');
 
 
-
 INSERT INTO carts VALUES(1,1,'2024-06-18 15:13:32');
 INSERT INTO carts VALUES(2,2,'2024-06-18 15:13:32');
 INSERT INTO carts VALUES(3,3,'2024-06-18 15:13:32');
