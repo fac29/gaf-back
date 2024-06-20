@@ -46,6 +46,13 @@ An ecommerce web app. Built with typescript, node deployed on AWS. Tested with P
     PORT=3000
     DB_FILE=gaf_database.sqlite
     ```
+    
+4.  **Create and Seed the database:**
+
+    ```
+    node database/db.js
+    node database/seed.js
+    ```
 
 ## Usage
 
