@@ -87,17 +87,16 @@ export function Products(app: Express) {
 		try {
 			const fetchProduct = await sqlAverageRating(productId);
 			if (fetchProduct.length < 1) {
-				res.send(`No rating for ID${productId} was not found in the database`);
-			} else {
-				res.send(fetchProduct);
+				console.log(
+					`No rating for ID${productId} was not found in the database`,
+				);
 			}
+			res.send(fetchProduct);
 		} catch (error) {
 			res.send((error as Error).message);
 			console.log((error as Error).message);
 		}
 	});
-
-
 }
 
 export default Products;
