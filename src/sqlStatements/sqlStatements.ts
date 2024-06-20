@@ -422,10 +422,9 @@ export async function sqlAverageRating(productId: number) {
 			)
 			.all(productId);
 		if (averageRating.length === 0) {
-			return `No rating was found`;
-		} else {
-			return averageRating;
+			console.log(`No rating was found`);
 		}
+		return averageRating;
 	} catch (error) {
 		console.log((error as Error).message);
 		return (error as Error).message;
