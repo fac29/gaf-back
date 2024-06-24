@@ -191,7 +191,7 @@ INSERT INTO reviews VALUES(59,'Great Features','Feature rich and useful','path/t
 INSERT INTO reviews VALUES(60,'Very Functional','Does what it says','path/to/review60.jpg',4,18,31,'2024-06-18 15:13:32');
 
 
-INSERT INTO carts VALUES(1,1,'2024-06-18 15:13:32');
+/* INSERT INTO carts VALUES(1,1,'2024-06-18 15:13:32');
 INSERT INTO carts VALUES(2,2,'2024-06-18 15:13:32');
 INSERT INTO carts VALUES(3,3,'2024-06-18 15:13:32');
 INSERT INTO carts VALUES(4,4,'2024-06-18 15:13:32');
@@ -253,7 +253,7 @@ INSERT INTO products_carts VALUES(27,26,27,'2024-06-18 15:13:32');
 INSERT INTO products_carts VALUES(28,27,28,'2024-06-18 15:13:32');
 INSERT INTO products_carts VALUES(29,28,29,'2024-06-18 15:13:32');
 INSERT INTO products_carts VALUES(30,29,30,'2024-06-18 15:13:32');
-
+ */
 
 INSERT INTO sessions VALUES(1,1,'2024-06-18 15:13:32',NULL);
 INSERT INTO sessions VALUES(2,2,'2024-06-18 15:13:32',NULL);
