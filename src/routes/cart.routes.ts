@@ -2,7 +2,7 @@ import { Express, Request, Response } from 'express';
 import {
 	sqlDeleteCart,
 	sqlFetchCart,
-	sqlUpdateCart,
+	sqlUpdateCarts,
 	sqlCreateCart,
 } from '../sqlStatements/sqlStatements';
 
@@ -45,7 +45,7 @@ export function Cart(app: Express) {
 		const newContent = req.body.content;
 
 		try {
-			const updateCarts = await sqlUpdateCart(cartId, newContent);
+			const updateCart = await sqlUpdateCarts(cartId, newContent);
 			if (updateCart.length < 1) {
 				res.send(`Cart with ID ${cartId} was not found in the database`);
 			} else {
