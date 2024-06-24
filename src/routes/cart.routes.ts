@@ -56,7 +56,6 @@ export function Cart(app: Express) {
 			console.log((error as Error).message);
 		}
 	});
-	//
 
 	//
 	app.post('/cart', async (req: Request, res: Response) => {
