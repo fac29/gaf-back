@@ -123,23 +123,39 @@ export async function sqlFetchCart(cartId: number) {
 	}
 }
 
-export async function sqlUpdateCart(cartId: number, newContent: any) {
+export async function sqlUpdateCarts(cartId: number, newContent: any) {
 	try {
+		// Update the carts table
 		const updateCart = await db
 			.prepare(
 				`
                 UPDATE carts
-                SET content = ?
+                SET completed = ?, completed_at = ?
                 WHERE id = ?
                 `,
 			)
-			.run(newContent, cartId);
+			.run(newContent.completed, newContent.completed_at, cartId);
 
 		if (updateCart.changes === 0) {
 			return `Cart was not found in the database`;
-		} else {
-			return `Cart with id ${cartId} was successfully updated`;
 		}
+
+		// Update the products_carts table
+		const updateProductCart = await db
+			.prepare(
+				`
+                UPDATE products_carts
+                SET quantity = ?
+                WHERE cart_id = ? AND products_id = ?
+                `,
+			)
+			.run(newContent.quantity, cartId, newContent.products_id);
+
+		if (updateProductCart.changes === 0) {
+			return `Product in cart was not found in the database`;
+		}
+
+		return `Cart with id ${cartId} was successfully updated`;
 	} catch (error) {
 		console.log((error as Error).message);
 		return (error as Error).message;
