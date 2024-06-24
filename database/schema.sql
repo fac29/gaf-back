@@ -55,6 +55,8 @@ CREATE TABLE IF NOT EXISTS carts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    completed BOOLEAN DEFAULT FALSE,
+    completed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -62,6 +64,7 @@ CREATE TABLE IF NOT EXISTS products_carts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     cart_id INTEGER,
     products_id INTEGER,
+    quantity INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cart_id) REFERENCES carts(id),
     FOREIGN KEY (products_id) REFERENCES products(id)
