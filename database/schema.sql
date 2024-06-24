@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS products_carts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     cart_id INTEGER,
     products_id INTEGER,
+    quantity INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cart_id) REFERENCES carts(id),
     FOREIGN KEY (products_id) REFERENCES products(id)
