@@ -141,6 +141,7 @@ export async function sqlUpdateCarts(cartId: number, newContent: any) {
 		}
 
 		// Update the products_carts table
+		// this function needs to run on a loop
 		const updateProductCart = await db
 			.prepare(
 				`
