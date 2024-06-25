@@ -179,8 +179,19 @@ export async function sqlCreateCart(userID: number) {
 			console.log(
 				`New cart with id ${insertCart.lastInsertRowid} was successfully created`,
 			);
+
+			// Query the database to retrieve the newly inserted cart
+			const newCart = await db
+				.prepare(
+					`
+                    SELECT * FROM carts
+                    WHERE id = ?
+                    `,
+				)
+				.get(insertCart.lastInsertRowid);
+
+			return newCart;
 		}
-		return insertCart;
 	} catch (error) {
 		console.log((error as Error).message);
 		return (error as Error).message;

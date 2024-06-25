@@ -59,7 +59,6 @@ export function Cart(app: Express) {
 	//
 	app.post('/cart', async (req: Request, res: Response) => {
 		const uId = req.body.userId;
-		console.log(uId);
 		try {
 			const newCart = await sqlCreateCart(uId);
 			res.send(newCart);

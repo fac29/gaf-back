@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS carts (
     user_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     completed BOOLEAN DEFAULT FALSE,
-    completed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    completed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    /* FOREIGN KEY (user_id) REFERENCES users(id) */
 );
 
 CREATE TABLE IF NOT EXISTS products_carts (
