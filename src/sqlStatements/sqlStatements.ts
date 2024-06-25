@@ -162,16 +162,16 @@ export async function sqlUpdateCarts(cartId: number, newContent: any) {
 	}
 }
 
-export async function sqlCreateCart(newContent: any) {
+export async function sqlCreateCart(userID: number) {
 	try {
 		const insertCart = await db
 			.prepare(
 				`
-                INSERT INTO carts (content)
+                INSERT INTO carts (user_id)
                 VALUES (?)
                 `,
 			)
-			.run(newContent);
+			.run(userID);
 
 		if (insertCart.changes === 0) {
 			return `Failed to create a new cart`;

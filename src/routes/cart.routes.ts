@@ -58,10 +58,10 @@ export function Cart(app: Express) {
 	});
 	//
 	app.post('/cart', async (req: Request, res: Response) => {
-		const newContent = req.body.content;
+		const userID = req.body.content;
 
 		try {
-			const newCart = await sqlCreateCart(newContent);
+			const newCart = await sqlCreateCart(userID);
 			res.send(newCart);
 		} catch (error) {
 			res.send((error as Error).message);
