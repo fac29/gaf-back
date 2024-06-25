@@ -130,11 +130,11 @@ export async function sqlUpdateCarts(cartId: number, newContent: any) {
 			.prepare(
 				`
                 UPDATE carts
-                SET completed = ?, completed_at = ?
+                SET completed = TRUE, completed_at = CURRENT_TIMESTAMP
                 WHERE id = ?
                 `,
 			)
-			.run(newContent.completed, newContent.completed_at, cartId);
+			.run(cartId);
 
 		if (updateCart.changes === 0) {
 			return `Cart was not found in the database`;
@@ -144,9 +144,8 @@ export async function sqlUpdateCarts(cartId: number, newContent: any) {
 		const updateProductCart = await db
 			.prepare(
 				`
-                UPDATE products_carts
-                SET quantity = ?
-                WHERE cart_id = ? AND products_id = ?
+                INSERT INTO products_carts
+                VALUES quantity = ?, products_id = ?, cart_id = ?,
                 `,
 			)
 			.run(newContent.quantity, cartId, newContent.products_id);
@@ -174,10 +173,13 @@ export async function sqlCreateCart(userID: number) {
 			.run(userID);
 
 		if (insertCart.changes === 0) {
-			return `Failed to create a new cart`;
+			console.log(`Failed to create a new cart`);
 		} else {
-			return `New cart with id ${insertCart.lastInsertRowid} was successfully created`;
+			console.log(
+				`New cart with id ${insertCart.lastInsertRowid} was successfully created`,
+			);
 		}
+		return insertCart;
 	} catch (error) {
 		console.log((error as Error).message);
 		return (error as Error).message;
