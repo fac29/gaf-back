@@ -156,7 +156,16 @@ export async function sqlUpdateCarts(cartId: number, newContent: any[]) {
 			}
 		}
 
-		return `Cart with id ${cartId} was successfully updated`;
+		const productCartchanges = await db
+			.prepare(
+				`
+                SELECT * FROM products_carts
+                WHERE cart_id =?
+                `,
+			)
+			.run(cartId);
+
+		return productCartchanges;
 	} catch (error) {
 		console.error((error as Error).message);
 		return (error as Error).message;
