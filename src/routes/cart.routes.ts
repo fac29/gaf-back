@@ -45,12 +45,6 @@ export function Cart(app: Express) {
 		const newContent = req.body;
 
 		try {
-			console.log(
-				'this is the userCart id',
-				cartId,
-				'these are the items to add to productsCart',
-				newContent,
-			);
 			const updateCart = await sqlUpdateCarts(cartId, newContent);
 			res.send(updateCart);
 		} catch (error) {

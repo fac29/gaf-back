@@ -156,16 +156,25 @@ export async function sqlUpdateCarts(cartId: number, newContent: any[]) {
 			}
 		}
 
+		// Fetch the updated products_carts data and updated users_carts table
 		const productCartchanges = await db
 			.prepare(
 				`
                 SELECT * FROM products_carts
-                WHERE cart_id =?
+                WHERE cart_id = ?
                 `,
 			)
-			.run(cartId);
+			.all(cartId);
+		const userCartchanges = await db
+			.prepare(
+				`
+                SELECT * FROM carts
+                WHERE id =?
+                `,
+			)
+			.all(cartId);
 
-		return productCartchanges;
+		return { productCartchanges, userCartchanges };
 	} catch (error) {
 		console.error((error as Error).message);
 		return (error as Error).message;
