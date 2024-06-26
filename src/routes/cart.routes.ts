@@ -42,7 +42,7 @@ export function Cart(app: Express) {
 	app.put('/cart/:id', async (req: Request, res: Response) => {
 		const cartId: number = parseInt(req.params.id);
 		//req.body should contain product id and quantitynumber
-		const newContent = req.body.content;
+		const newContent = req.body;
 
 		try {
 			const updateCart = await sqlUpdateCarts(cartId, newContent);
