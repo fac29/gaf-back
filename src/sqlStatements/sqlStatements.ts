@@ -123,9 +123,9 @@ export async function sqlFetchCart(cartId: number) {
 	}
 }
 
-export async function sqlUpdateCarts(cartId: number, newContent: any) {
+export async function sqlUpdateCarts(cartId: number, newContent: any[]) {
 	try {
-		// Update the carts table
+		// Update the usercart table
 		const updateCart = await db
 			.prepare(
 				`
@@ -141,23 +141,24 @@ export async function sqlUpdateCarts(cartId: number, newContent: any) {
 		}
 
 		// Update the products_carts table
-		// this function needs to run on a loop
-		const updateProductCart = await db
-			.prepare(
-				`
-                INSERT INTO products_carts
-                VALUES quantity = ?, products_id = ?, cart_id = ?,
-                `,
-			)
-			.run(newContent.quantity, cartId, newContent.products_id);
+		for (const item of newContent) {
+			const updateProductCart = await db
+				.prepare(
+					`
+                    INSERT INTO products_carts (quantity, products_id, cart_id)
+                    VALUES (?, ?, ?)
+                    `,
+				)
+				.run(item.quantity, item.productId, cartId);
 
-		if (updateProductCart.changes === 0) {
-			return `Product in cart was not found in the database`;
+			if (updateProductCart.changes === 0) {
+				return `Product ${item.productId} in cart was not found in the database`;
+			}
 		}
 
 		return `Cart with id ${cartId} was successfully updated`;
 	} catch (error) {
-		console.log((error as Error).message);
+		console.error((error as Error).message);
 		return (error as Error).message;
 	}
 }

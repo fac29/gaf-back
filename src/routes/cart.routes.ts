@@ -45,12 +45,14 @@ export function Cart(app: Express) {
 		const newContent = req.body;
 
 		try {
+			console.log(
+				'this is the userCart id',
+				cartId,
+				'these are the items to add to productsCart',
+				newContent,
+			);
 			const updateCart = await sqlUpdateCarts(cartId, newContent);
-			if (updateCart.length < 1) {
-				res.send(`Cart with ID ${cartId} was not found in the database`);
-			} else {
-				res.send(updateCart);
-			}
+			res.send(updateCart);
 		} catch (error) {
 			res.send((error as Error).message);
 			console.log((error as Error).message);
