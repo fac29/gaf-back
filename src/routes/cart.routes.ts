@@ -42,15 +42,11 @@ export function Cart(app: Express) {
 	app.put('/cart/:id', async (req: Request, res: Response) => {
 		const cartId: number = parseInt(req.params.id);
 		//req.body should contain product id and quantitynumber
-		const newContent = req.body.content;
+		const newContent = req.body;
 
 		try {
 			const updateCart = await sqlUpdateCarts(cartId, newContent);
-			if (updateCart.length < 1) {
-				res.send(`Cart with ID ${cartId} was not found in the database`);
-			} else {
-				res.send(updateCart);
-			}
+			res.send(updateCart);
 		} catch (error) {
 			res.send((error as Error).message);
 			console.log((error as Error).message);
@@ -58,10 +54,9 @@ export function Cart(app: Express) {
 	});
 	//
 	app.post('/cart', async (req: Request, res: Response) => {
-		const newContent = req.body.content;
-
+		const uId = req.body.userId;
 		try {
-			const newCart = await sqlCreateCart(newContent);
+			const newCart = await sqlCreateCart(uId);
 			res.send(newCart);
 		} catch (error) {
 			res.send((error as Error).message);

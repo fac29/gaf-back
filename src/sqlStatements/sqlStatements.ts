@@ -123,60 +123,93 @@ export async function sqlFetchCart(cartId: number) {
 	}
 }
 
-export async function sqlUpdateCarts(cartId: number, newContent: any) {
+export async function sqlUpdateCarts(cartId: number, newContent: any[]) {
 	try {
-		// Update the carts table
+		// Update the usercart table
 		const updateCart = await db
 			.prepare(
 				`
                 UPDATE carts
-                SET completed = ?, completed_at = ?
+                SET completed = TRUE, completed_at = CURRENT_TIMESTAMP
                 WHERE id = ?
                 `,
 			)
-			.run(newContent.completed, newContent.completed_at, cartId);
+			.run(cartId);
 
 		if (updateCart.changes === 0) {
 			return `Cart was not found in the database`;
 		}
 
 		// Update the products_carts table
-		const updateProductCart = await db
-			.prepare(
-				`
-                UPDATE products_carts
-                SET quantity = ?
-                WHERE cart_id = ? AND products_id = ?
-                `,
-			)
-			.run(newContent.quantity, cartId, newContent.products_id);
+		for (const item of newContent) {
+			const updateProductCart = await db
+				.prepare(
+					`
+                    INSERT INTO products_carts (quantity, products_id, cart_id)
+                    VALUES (?, ?, ?)
+                    `,
+				)
+				.run(item.quantity, item.productId, cartId);
 
-		if (updateProductCart.changes === 0) {
-			return `Product in cart was not found in the database`;
+			if (updateProductCart.changes === 0) {
+				return `Product ${item.productId} in cart was not found in the database`;
+			}
 		}
 
-		return `Cart with id ${cartId} was successfully updated`;
+		// Fetch the updated products_carts data and updated users_carts table
+		const productCartchanges = await db
+			.prepare(
+				`
+                SELECT * FROM products_carts
+                WHERE cart_id = ?
+                `,
+			)
+			.all(cartId);
+		const userCartchanges = await db
+			.prepare(
+				`
+                SELECT * FROM carts
+                WHERE id =?
+                `,
+			)
+			.all(cartId);
+
+		return { productCartchanges, userCartchanges };
 	} catch (error) {
-		console.log((error as Error).message);
+		console.error((error as Error).message);
 		return (error as Error).message;
 	}
 }
 
-export async function sqlCreateCart(newContent: any) {
+export async function sqlCreateCart(userID: number) {
 	try {
 		const insertCart = await db
 			.prepare(
 				`
-                INSERT INTO carts (content)
+                INSERT INTO carts (user_id)
                 VALUES (?)
                 `,
 			)
-			.run(newContent);
+			.run(userID);
 
 		if (insertCart.changes === 0) {
-			return `Failed to create a new cart`;
+			console.log(`Failed to create a new cart`);
 		} else {
-			return `New cart with id ${insertCart.lastInsertRowid} was successfully created`;
+			console.log(
+				`New cart with id ${insertCart.lastInsertRowid} was successfully created`,
+			);
+
+			// Query the database to retrieve the newly inserted cart
+			const newCart = await db
+				.prepare(
+					`
+                    SELECT * FROM carts
+                    WHERE id = ?
+                    `,
+				)
+				.get(insertCart.lastInsertRowid);
+
+			return newCart;
 		}
 	} catch (error) {
 		console.log((error as Error).message);
